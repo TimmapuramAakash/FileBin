@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Filebin</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">FileBin (File Sharing Application)</h4>
+      <form action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="row">
+          <div class="col-sm-8">
+            <p>Please choose a file to shared</p>
+          </div>
+          <div class="col-sm-4">
+            <input type="file" name="fileToUpload" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <p>Click on create link this will create a link and you can use link only once</p>
+          </div>
+          <div class="col-sm-4">
+            <button type="submit" class="btn">CreateLink</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <p>Once Created share the URL</p>
+          </div>
+          <div class="col-sm-4">
+            <a href=<%=(url) ? url : "" %>><%= (url) ? url : "NOT YET CREATED" %></a>
+          </div>
+        </div>
+        <hr>
+        <p class="mb-0">
+          <%= (msg) ? msg : "" %>
+        </p>
+    </div>
+    </form>
+  </div>
+
+  <% if(items !='' ){ %>
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">name</th>
+          <th scope="col">uploaded date</th>
+          <th scope="col">download date</th>
+          <th scope="col">link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i=0; i < items.length; i++) { %>
+          <tr>
+            <td>
+              <%= items[i].id %>
+            </td>
+            <td>
+              <%= items[i].name %>
+            </td>
+            <td>
+              <%= items[i].uploaded_date %>
+            </td>
+            <td>
+              <%= items[i].downloaded_date %>
+            </td>
+            <td><a href=<%=items[i].link %>><%= items[i].link %></a></td>
+          </tr>
+          <% } %>
+      </tbody>
+    </table>
+    <% } %>
+</body>
+
+</html>
